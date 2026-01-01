@@ -1,0 +1,171 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String
+  name          String
+  avatar        String?
+  jobTitle      String?
+  bio           String?
+  status        String?   // Online, Away, DND
+  workspaces    WorkspaceMember[]
+  messages      Message[]
+  channels      Channel[] @relation("ChannelMembers")
+  createdAt     DateTime  @default(now())
+  invitations   Invitation[]
+  contacts      Contact[] @relation("UserContacts")
+  events        Event[]   @relation("UserEvents")
+  eventRequests EventParticipant[]
+  notifications Notification[]
+}
+
+model Workspace {
+  id        String    @id @default(cuid())
+  name      String
+  slug      String    @unique
+  logo      String?
+  members   WorkspaceMember[]
+  channels  Channel[]
+  invitations Invitation[]
+  createdAt DateTime  @default(now())
+}
+
+model WorkspaceMember {
+  id          String    @id @default(cuid())
+  role        String    @default("MEMBER") // OWNER, ADMIN, MEMBER, GUEST
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  workspaceId String
+
+  @@unique([userId, workspaceId])
+}
+
+model Channel {
+  id          String    @id @default(cuid())
+  name        String
+  type        String    @default("PUBLIC") // PUBLIC, PRIVATE, DIRECT
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  workspaceId String
+  messages    Message[]
+  members     User[]    @relation("ChannelMembers")
+
+  @@unique([workspaceId, name])
+}
+
+model Message {
+  id          String    @id @default(cuid())
+  content     String
+  isPinned    Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  sender      User      @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  senderId    String
+  
+  channel     Channel   @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  channelId   String
+
+  // Threading
+  parent      Message?  @relation("Thread", fields: [parentId], references: [id], onDelete: Cascade)
+  parentId    String?
+  replies     Message[] @relation("Thread")
+
+  // Reactions: JSON string { "emoji": ["userId"] }
+  reactions   String?   
+
+  // Attachments
+  files       File[]
+}
+
+model File {
+  id        String   @id @default(cuid())
+  name      String
+  url       String
+  type      String   // image, pdf, etc.
+  size      Int
+  message   Message  @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  messageId String
+  createdAt DateTime @default(now())
+}
+
+model Invitation {
+  id          String    @id @default(cuid())
+  email       String
+  token       String    @unique
+  role        String    @default("MEMBER")
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  workspaceId String
+  invitedBy   User      @relation(fields: [invitedById], references: [id], onDelete: Cascade)
+  invitedById String
+  expiresAt   DateTime
+  acceptedAt  DateTime?
+  createdAt   DateTime  @default(now())
+}
+
+model Contact {
+  id          String   @id @default(cuid())
+  userId      String   // The owner of the contact list
+  contactId   String?  // Optional link to another User in the system
+  name        String
+  email       String?
+  phone       String?
+  company     String?
+  role        String?
+  category    String   @default("Work") // Work, Friends, Family, Professional
+  isFavorite  Boolean  @default(false)
+  image       String?
+  createdAt   DateTime @default(now())
+  
+  user        User     @relation("UserContacts", fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Event {
+  id          String   @id @default(cuid())
+  userId      String   // Owner/Creator
+  title       String
+  description String?
+  location    String?
+  type        String   @default("Work") // Work, Personal, Public
+  priority    String   @default("Medium") // Low, Medium, High
+  date        String   // Display date (e.g. "Jan 01, 2026")
+  startTime   DateTime
+  endTime     DateTime?
+  allDay      Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  
+  user        User     @relation("UserEvents", fields: [userId], references: [id], onDelete: Cascade)
+  participants EventParticipant[]
+}
+
+model EventParticipant {
+  id      String @id @default(cuid())
+  eventId String
+  userId  String
+  status  String @default("PENDING") // PENDING, ACCEPTED, DECLINED
+  
+  event   Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  user    User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@unique([eventId, userId])
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String
+  content   String
+  type      String   // Message, Event, System
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}

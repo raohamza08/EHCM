@@ -1,0 +1,270 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    height: 100%;
+}
+
+.filterBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.categories {
+    display: flex;
+    gap: 8px;
+}
+
+.catBtn {
+    padding: 8px 16px;
+    background: var(--background-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    color: var(--foreground-secondary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.catBtn:hover {
+    border-color: var(--border-hover);
+    color: var(--foreground);
+    background: var(--surface-hover);
+}
+
+.catActive {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.list {
+    display: grid;
+    gap: 16px;
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 24px;
+}
+
+.gridView {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.listView {
+    grid-template-columns: 1fr;
+}
+
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+}
+
+.cardMain {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.avatarContainer {
+    position: relative;
+}
+
+.cardAvatar {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-lg);
+    background: var(--background-tertiary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--foreground-secondary);
+    border: 2px solid var(--border);
+    overflow: hidden;
+}
+
+.cardAvatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.statusDot {
+    position: absolute;
+    bottom: -4px;
+    right: -4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 3px solid var(--surface);
+}
+
+.active {
+    background: var(--accent-green);
+}
+
+.away {
+    background: var(--accent-orange);
+}
+
+.offline {
+    background: var(--foreground-muted);
+}
+
+.info h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.nameRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.favBtn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    color: var(--foreground-tertiary);
+    transition: all 0.2s;
+}
+
+.favBtn:hover {
+    color: var(--accent-orange);
+    transform: scale(1.2);
+}
+
+.favIcon {
+    color: inherit;
+}
+
+.favActive {
+    color: var(--accent-orange);
+}
+
+.role {
+    font-size: 0.875rem;
+    color: var(--foreground-tertiary);
+}
+
+.contactDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.detailItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--foreground-secondary);
+    font-size: 0.875rem;
+}
+
+.cardActions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.iconBtn {
+    flex: 1;
+    height: 40px;
+    background: var(--background-secondary);
+    border: none;
+    border-radius: var(--radius-md);
+    color: var(--foreground-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.iconBtn:hover {
+    background: var(--hover-overlay);
+    color: var(--primary);
+}
+
+.deleteBtn {
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md);
+    color: var(--foreground-tertiary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.deleteBtn:hover {
+    background: var(--error-light);
+    color: var(--error);
+}
+
+.divider {
+    width: 1px;
+    height: 24px;
+    background: var(--border);
+    margin: 0 4px;
+}
+
+/* List view variations */
+.cardList {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+}
+
+.cardList .cardMain {
+    flex: 1;
+}
+
+.cardList .cardAvatar {
+    width: 48px;
+    height: 48px;
+    font-size: 1rem;
+}
+
+.cardList .contactDetails {
+    flex: 1.5;
+    flex-direction: row;
+    gap: 32px;
+}
+
+.cardList .cardActions {
+    margin-top: 0;
+    gap: 4px;
+}
+
+.cardList .iconBtn {
+    width: 40px;
+    flex: none;
+}

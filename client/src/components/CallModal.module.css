@@ -1,0 +1,219 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.container {
+    width: 90%;
+    max-width: 900px;
+    height: 80vh;
+    background: #1a1a1b;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header {
+    padding: 15px 25px;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-weight: 500;
+}
+
+.closeBtn {
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.closeBtn:hover {
+    color: white;
+}
+
+.videoGrid {
+    flex: 1;
+    position: relative;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remoteVideoContainer {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.remoteVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.localVideoContainer {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 200px;
+    aspect-ratio: 16/9;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.localVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.videoOffOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #2a2a2b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+}
+
+.controls {
+    padding: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.controlBtn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.controlBtn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.controlBtn.active {
+    background: #ea4335;
+}
+
+.endCallBtn {
+    background: #ea4335 !important;
+}
+
+.endCallBtn:hover {
+    background: #d93025 !important;
+}
+
+.audioPlaceholder {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    gap: 20px;
+}
+
+.pulsingAvatar {
+    width: 120px;
+    height: 120px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: pulse 2s infinite;
+}
+
+.connectingOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    gap: 15px;
+}
+
+.loader {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top: 3px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0.7);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 20px rgba(var(--primary-rgb), 0);
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0);
+    }
+}
+
+.localVideoPlaceholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #444;
+    color: #fff;
+    font-size: 10px;
+    text-align: center;
+}

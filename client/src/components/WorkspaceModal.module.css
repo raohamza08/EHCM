@@ -1,0 +1,351 @@
+/* ============================================
+   WORKSPACE MODAL - Modern, Premium Design
+   ============================================ */
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: fadeIn var(--transition-base);
+    padding: var(--space-4);
+}
+
+.modal {
+    background: var(--surface);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-xl);
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    overflow: hidden;
+    animation: scaleIn var(--transition-slow);
+    border: 1px solid var(--border);
+}
+
+.modal h2 {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--foreground);
+    margin: 0;
+    padding: var(--space-6) var(--space-6) var(--space-2);
+}
+
+.modal>p {
+    font-size: var(--font-size-sm);
+    color: var(--foreground-secondary);
+    line-height: var(--line-height-relaxed);
+    margin: 0;
+    padding: 0 var(--space-6) var(--space-4);
+}
+
+.form {
+    padding: var(--space-4) var(--space-6) var(--space-6);
+}
+
+.field {
+    margin-bottom: var(--space-5);
+}
+
+.field label {
+    display: block;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--foreground);
+    margin-bottom: var(--space-2);
+}
+
+.field input,
+.field select,
+.field textarea {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--font-size-base);
+    background: var(--background-secondary);
+    border: 2px solid transparent;
+    border-radius: var(--radius-lg);
+    color: var(--foreground);
+    transition: all var(--transition-base);
+    font-family: inherit;
+}
+
+.field input:hover,
+.field select:hover,
+.field textarea:hover {
+    background: var(--background-tertiary);
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+    outline: none;
+    background: var(--surface);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+    color: var(--foreground-tertiary);
+}
+
+.field textarea {
+    resize: vertical;
+    min-height: 100px;
+    font-family: inherit;
+}
+
+.field select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right var(--space-4) center;
+    padding-right: var(--space-10);
+}
+
+.error {
+    padding: var(--space-3) var(--space-4);
+    background: var(--error-light);
+    border: 1px solid var(--error);
+    border-radius: var(--radius-lg);
+    color: var(--error);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-4);
+    animation: slideDown var(--transition-base);
+}
+
+.actions {
+    display: flex;
+    gap: var(--space-3);
+    justify-content: flex-end;
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--border);
+}
+
+.cancel {
+    padding: var(--space-3) var(--space-5);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    background: transparent;
+    color: var(--foreground-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.cancel:hover {
+    background: var(--hover-overlay);
+    border-color: var(--border-hover);
+    color: var(--foreground);
+}
+
+.cancel:active {
+    transform: scale(0.98);
+}
+
+.submit {
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+    color: white;
+    border: none;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-md);
+}
+
+.submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.submit:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 640px) {
+    .modal {
+        max-width: 100%;
+        margin: var(--space-4);
+    }
+
+    .modal h2 {
+        font-size: var(--font-size-xl);
+        padding: var(--space-5) var(--space-5) var(--space-2);
+    }
+
+    .modal>p {
+        padding: 0 var(--space-5) var(--space-3);
+    }
+
+    .form {
+        padding: var(--space-3) var(--space-5) var(--space-5);
+    }
+
+    .actions {
+        flex-direction: column-reverse;
+    }
+
+    .cancel,
+    .submit {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+.overlay:focus {
+    outline: none;
+}
+
+.modal:focus {
+    outline: none;
+}
+
+/* Click outside to close */
+.overlay {
+    cursor: pointer;
+}
+
+.modal {
+    cursor: default;
+}
+
+/* ============================================
+   LOADING STATE
+   ============================================ */
+.submit:disabled::after {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-left: var(--space-2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: var(--radius-full);
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ============================================
+   HELPER TEXT
+   ============================================ */
+.field small {
+    display: block;
+    margin-top: var(--space-2);
+    font-size: var(--font-size-xs);
+    color: var(--foreground-tertiary);
+    line-height: var(--line-height-normal);
+}
+
+.field input:focus+small,
+.field textarea:focus+small {
+    color: var(--primary);
+}
+
+/* ============================================
+   CHECKBOX/RADIO STYLES
+   ============================================ */
+.field input[type="checkbox"],
+.field input[type="radio"] {
+    width: auto;
+    margin-right: var(--space-2);
+    cursor: pointer;
+}
+
+.field label:has(input[type="checkbox"]),
+.field label:has(input[type="radio"]) {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* ============================================
+   SUCCESS STATE
+   ============================================ */
+.success {
+    padding: var(--space-3) var(--space-4);
+    background: var(--success-light);
+    border: 1px solid var(--success);
+    border-radius: var(--radius-lg);
+    color: var(--success);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-4);
+    animation: slideDown var(--transition-base);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.success::before {
+    content: '✓';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background: var(--success);
+    color: white;
+    border-radius: var(--radius-full);
+    font-weight: var(--font-weight-bold);
+}

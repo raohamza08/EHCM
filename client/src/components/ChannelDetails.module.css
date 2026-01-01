@@ -1,0 +1,512 @@
+/* ============================================
+   CHANNEL DETAILS - Right Panel Info
+   ============================================ */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--surface);
+    overflow-y: auto;
+    animation: slideInRight var(--transition-base);
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.header {
+    padding: var(--space-5);
+    border-bottom: 1px solid var(--border);
+    background: var(--background);
+}
+
+.channelName {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--foreground);
+    margin-bottom: var(--space-2);
+}
+
+.channelHash {
+    color: var(--foreground-tertiary);
+}
+
+.channelDescription {
+    font-size: var(--font-size-sm);
+    color: var(--foreground-secondary);
+    line-height: var(--line-height-relaxed);
+}
+
+/* ============================================
+   SECTIONS
+   ============================================ */
+.section {
+    padding: var(--space-5);
+    border-bottom: 1px solid var(--border);
+}
+
+.sectionTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--foreground-tertiary);
+    margin-bottom: var(--space-4);
+}
+
+.badge {
+    background: var(--primary);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 10px;
+    min-width: 18px;
+    text-align: center;
+}
+
+.sectionAction {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-1) var(--space-2);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    text-transform: none;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--foreground-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.sectionAction:hover {
+    background: var(--hover-overlay);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* ============================================
+   MEMBERS LIST
+   ============================================ */
+.membersList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.member {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.member:hover {
+    background: var(--hover-overlay);
+}
+
+.memberAvatar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-full);
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.memberAvatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.statusIndicator {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: var(--radius-full);
+    background: var(--foreground-muted);
+    border: 2px solid var(--surface);
+}
+
+.statusIndicator.online {
+    background: var(--success);
+    box-shadow: 0 0 0 2px var(--success-light);
+}
+
+.memberInfo {
+    flex: 1;
+    min-width: 0;
+}
+
+.memberName {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--foreground);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.memberRole {
+    font-size: var(--font-size-xs);
+    color: var(--foreground-tertiary);
+}
+
+/* ============================================
+   PINNED MESSAGES
+   ============================================ */
+.pinnedList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.pinnedMessage {
+    padding: var(--space-3);
+    background: var(--background-secondary);
+    border-left: 3px solid var(--warning);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.pinnedMessage:hover {
+    background: var(--background-tertiary);
+    transform: translateX(2px);
+}
+
+.pinnedHeader {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+}
+
+.pinnedSender {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--foreground);
+}
+
+.pinnedTime {
+    font-size: var(--font-size-xs);
+    color: var(--foreground-tertiary);
+}
+
+.pinnedContent {
+    font-size: var(--font-size-sm);
+    color: var(--foreground-secondary);
+    line-height: var(--line-height-normal);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+/* ============================================
+   FILES/ATTACHMENTS
+   ============================================ */
+.filesList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+}
+
+.fileItem {
+    width: 100%;
+}
+
+/* If fileItem contains fileIconBox, make it span both columns */
+.fileItem:has(.fileIconBox) {
+    grid-column: span 2;
+}
+
+.imageThumb {
+    width: 100%;
+    height: 80px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--background-secondary);
+    border: 1px solid var(--border);
+    cursor: pointer;
+}
+
+.imageThumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-base);
+}
+
+.imageThumb img:hover {
+    transform: scale(1.05);
+}
+
+.fileIconBox {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    background: var(--background-secondary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    width: 100%;
+}
+
+.fileNameSmall {
+    flex: 1;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--foreground);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.downloadIcon {
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ============================================
+   EMPTY STATES
+   ============================================ */
+.emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-8);
+    text-align: center;
+}
+
+.emptyIcon {
+    width: 48px;
+    height: 48px;
+    color: var(--foreground-muted);
+    margin-bottom: var(--space-3);
+    opacity: 0.5;
+}
+
+.emptyText {
+    font-size: var(--font-size-sm);
+    color: var(--foreground-tertiary);
+    line-height: var(--line-height-relaxed);
+}
+
+/* ============================================
+   NOTIFICATIONS TOGGLE
+   ============================================ */
+.notificationToggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-3);
+    background: var(--background-secondary);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-3);
+}
+
+.toggleLabel {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--foreground);
+}
+
+.switch {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    background: var(--border);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: background var(--transition-base);
+}
+
+.switch.active {
+    background: var(--primary);
+}
+
+.switchKnob {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: var(--radius-full);
+    transition: transform var(--transition-base);
+    box-shadow: var(--shadow-sm);
+}
+
+.switch.active .switchKnob {
+    transform: translateX(20px);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+.container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.container::-webkit-scrollbar-thumb {
+    background: var(--foreground-muted);
+    border-radius: var(--radius-full);
+}
+
+.container::-webkit-scrollbar-thumb:hover {
+    background: var(--foreground-tertiary);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+    .section {
+        padding: var(--space-4);
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        max-width: 400px;
+        z-index: var(--z-modal);
+    }
+
+    .header {
+        padding: var(--space-4);
+    }
+
+    .section {
+        padding: var(--space-3);
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+.member:focus-visible,
+.pinnedMessage:focus-visible,
+.file:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: -2px;
+}
+
+.channelActions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+}
+
+.actionBtn {
+    flex: 1;
+    min-width: 120px;
+    padding: var(--space-2) var(--space-4);
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.actionBtn:hover {
+    background: #5d5dff;
+}
+
+.actionBtnSecondary {
+    flex: 1;
+    min-width: 120px;
+    padding: var(--space-2) var(--space-4);
+    background: var(--background-secondary);
+    color: var(--foreground);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.actionBtnSecondary:hover {
+    background: var(--background-tertiary);
+    border-color: var(--primary);
+}
+
+.actionBtnIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--background-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--foreground-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+/* ============================================
+   DARK MODE ADJUSTMENTS
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    .switchKnob {
+        background: var(--surface);
+    }
+}

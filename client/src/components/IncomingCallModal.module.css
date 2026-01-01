@@ -1,0 +1,85 @@
+.container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 320px;
+    background: #1a1a1b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: var(--shadow-2xl);
+    z-index: 10001;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.info {
+    flex: 1;
+}
+
+.info h4 {
+    margin: 0;
+    font-size: 15px;
+    color: white;
+}
+
+.info p {
+    margin: 2px 0 0;
+    font-size: 13px;
+    color: #999;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: white;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+.accept {
+    background: #4cc38a;
+}
+
+.reject {
+    background: #ea4335;
+}
