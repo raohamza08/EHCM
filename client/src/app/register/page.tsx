@@ -1,8 +1,8 @@
 "use client";
-import { useEffect } from "react";
+import React, { useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function RegisterRedirect() {
+function RegisterContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
 
@@ -16,5 +16,13 @@ export default function RegisterRedirect() {
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100vh" }}>
             Redirecting to registration...
         </div>
+    );
+}
+
+export default function RegisterRedirect() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <RegisterContent />
+        </Suspense>
     );
 }

@@ -39,12 +39,17 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
         clearTimeout(id);
 
         if (!response.ok) {
+            if (response.status === 401) {
+                // Token expired or invalid
+                useAuthStore.getState().logout();
+                throw new Error("Session expired. Please login again.");
+            }
+
             let errorMessage = "Request failed";
             try {
                 const error = await response.json();
                 errorMessage = error.message || errorMessage;
             } catch {
-                // If not JSON, use status text
                 errorMessage = response.statusText || errorMessage;
             }
             throw new Error(errorMessage);

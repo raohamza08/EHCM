@@ -44,6 +44,9 @@ interface ChatState {
         signalData: any;
     };
     setCallState: (state: Partial<ChatState["callState"]>) => void;
+    setCurrentView: (view: "chat" | "creative") => void;
+    markAsRead: (channelId: string) => void;
+    incrementUnread: (channelId: string) => void;
 }
 
 export const useChatStore = create<ChatState>((set) => ({
@@ -78,7 +81,9 @@ export const useChatStore = create<ChatState>((set) => ({
     })),
     setActiveChannel: (channelId) => set((state) => {
         const nextUnread = { ...state.unreadChannels };
-        delete nextUnread[channelId];
+        if (channelId) {
+            delete nextUnread[channelId];
+        }
         return { activeChannelId: channelId, unreadChannels: nextUnread };
     }),
     setActiveWorkspace: (workspaceId) => set({ activeWorkspaceId: workspaceId }),
@@ -113,5 +118,11 @@ export const useChatStore = create<ChatState>((set) => ({
     },
     setCallState: (newState) => set((state) => ({
         callState: { ...state.callState, ...newState }
+    })),
+    setUnread: (channelId, count) => set((state) => ({
+        unreadChannels: {
+            ...state.unreadChannels,
+            [channelId]: count
+        }
     }))
 }));
